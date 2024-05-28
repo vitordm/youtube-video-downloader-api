@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  yt-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .docker/yt_app:/app/download
+    ports:
+      - "8088:80"
+      - "8087:5000"

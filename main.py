@@ -9,7 +9,7 @@ def download_video(url, resolution):
         yt = YouTube(url)
         stream = yt.streams.filter(progressive=True, file_extension='mp4', resolution=resolution).first()
         if stream:
-            stream.download()
+            stream.download(output_path='/app/download', skip_existing=True, max_retries=0)
             return True, None
         else:
             return False, "Video with the specified resolution not found."
@@ -73,4 +73,4 @@ def video_info():
         return jsonify({"error": error_message}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
